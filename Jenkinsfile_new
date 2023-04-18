@@ -33,8 +33,7 @@ pipeline {
     stage('Deploying App to Kubernetes') {
       steps {
        sh '''
-          kubectl create -f deployment.yaml --kubeconfig='/home/useradmin/.kube/config'
-          kubectl create -f service.yaml
+         ls -lrt
        '''
       }
     }
