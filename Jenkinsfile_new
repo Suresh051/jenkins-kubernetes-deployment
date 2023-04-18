@@ -32,10 +32,12 @@ pipeline {
 
     stage('Deploying App to Kubernetes') {
       steps {
-        sh '''
+      script {
+        docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
         kubectl apply -f deployment.yaml
         kubectl apply -f service.yaml
-        '''
+        }
+        }
       }
     }
 
