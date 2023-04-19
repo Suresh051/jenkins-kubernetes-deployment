@@ -30,13 +30,15 @@ pipeline {
       }
     }
 
-    stage('Deploying App to Kubernetes') {
-      steps {
-        script {
-          kubernetesDeploy(configs: "deployment.yaml", "service.yaml")
+       stage ('K8S Deploy') {
+          steps {
+            script {
+                withKubeConfig([credentialsId: 'k8s', serverUrl: '']) {
+                sh ('kubectl apply -f  deployment.yaml')
+                }
+            }
         }
-      }
-    }
+     }
 
   }
 
