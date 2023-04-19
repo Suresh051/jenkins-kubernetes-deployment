@@ -32,9 +32,9 @@ pipeline {
 
     stage('Deploying App to Kubernetes') {
       steps {
-       sh '''
-         ls -lrt
-       '''
+        script {
+          kubernetesDeploy(configs: "deployment.yaml", "service.yaml")
+        }
       }
     }
 
